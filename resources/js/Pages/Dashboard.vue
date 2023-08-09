@@ -202,7 +202,7 @@ watch(query, () => {
 							</tbody>
 						</table>
 					</div>
-					<div v-if="!fetchingDocuments && documents.length === 0" class="text-center my-8 text-gray-600">
+					<div v-if="!fetchingDocuments && documents.length === 0" class="text-center my-8text-gray-600">
 						You don't have any files.
 					</div>
 
@@ -212,29 +212,26 @@ watch(query, () => {
 
 		<div v-if="searchModalOpen && selectedDocument"
 			class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
-			<div class="bg-white rounded-lg p-4 relative w-3/4 h-3/4 overflow-y-auto">
-				<button class="absolute top-2 right-2 text-gray-600" @click="closeSearchModal">X</button>
-				<h3 class="text-lg font-medium mb-2">{{ selectedDocument.original_name }}</h3>
-				<form @submit.prevent="submitSearch" class="flex items-center mb-4">
-					<input type="text" v-model="query" class="border border-gray-300 rounded-md px-2 py-1 mr-2" />
-					<button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Search</button>
-				</form>
+			<div class="rounded-lg relative w-full max-w-screen-lg h-full max-h-[80vh] overflow-y-auto">
+				<button class="absolute z-10 top-[1rem] right-[1rem] w-6 h-6 text-gray-100 bg-slate-600 rounded-full text-xs" @click="closeSearchModal">X</button>
+				<div class="modal-header">
+					<h3 class="text-lg font-medium mb-4">{{ selectedDocument.original_name }}</h3>
+					<form @submit.prevent="submitSearch" class="flex items-center mb-4 gap-2">
+						<input type="text" v-model="query" class="border border-gray-300 rounded-md px-2 py-1 flex-grow" />
+						<button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Search</button>
+					</form>
+				</div>
 
-				<div v-if="searchSubmitted && !searching && results.length === 0" class="text-center text-gray-600">
+				<div v-if="searchSubmitted && !searching && results.length === 0" class="text-center text-gray-600 bg-white py-4">
 					No results found.
 				</div>
 
-				<ul class="divide-y divide-gray-200">
+				<ul class="bg-white divide-y divide-gray-200">
 					<li v-for="(result, index) in formattedResults" :key="index" class="px-4 py-4 sm:px-6">
 						<div class="flex items-center justify-between">
 							<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
 								Page {{ result.page }}
 							</span>
-							<!-- <div class="ml-2 flex-shrink-0 flex">
-								<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-									Page {{ result.page }}
-								</span>
-							</div> -->
 						</div>
 						<div class="mt-2 sm:flex sm:justify-between">
 							<div class="sm:flex">
@@ -266,6 +263,14 @@ watch(query, () => {
 	border-top-color: currentColor;
 	border-radius: 50%;
 	animation: spinner 0.6s linear infinite;
+}
+
+.modal-header {
+	position: sticky;
+	top: 0;
+	background-color: #f3f3f3;
+	padding: 1rem;
+	border-bottom: 1px solid #e5e5e5;
 }
 
 .search {
