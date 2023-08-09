@@ -101,35 +101,28 @@ const submitSearch = async () => {
 };
 
 const formattedResults = computed(() => {
-	return results.value.map((result) => {
-		// Limit the length of the snippet to 255 characters
-		let snippet = result.snippet.substring(0, 255);
+    return results.value.map((result) => {
+        // Limit the length of the snippet to 255 characters
+        let snippet = result.snippet.substring(0, 255);
 
-		// Add three dots before and after the snippet
-		snippet = '...' + snippet + '...';
+        // Add three dots before and after the snippet
+        snippet = '...' + snippet + '...';
 
-		// Split the snippet into an array of substrings
-		const substrings = snippet.split(new RegExp(`(${query.value})`, 'gi'));
+        // Create a regular expression that matches the search query with optional spaces between the words
+        const regex = new RegExp(`(${query.value.replace(/\s+/g, '\\s+')})`, 'gi');
 
-		// Wrap each part of the search term in a <strong> tag
-		const highlightedSubstrings = substrings.map((substring) => {
-			if (substring.toLowerCase() === query.value.toLowerCase()) {
-				return `<span class="text-blue-600 font-bold">${substring}</span>`;
-			} else {
-				return substring;
-			}
-		});
+        // Replace all occurrences of the search query with a highlighted version
+        snippet = snippet.replace(regex, '<span class="text-blue-600 font-bold">$1</span>');
 
-		// Join the substrings back into a single string
-		snippet = highlightedSubstrings.join('');
-
-		return {
-			term: query.value,
-			page: result.page,
-			snippet: snippet,
-		};
-	});
+        return {
+            term: query.value,
+            page: result.page,
+            snippet: snippet,
+        };
+    });
 });
+
+
 
 const fetchDocuments = async () => {
 	fetchingDocuments.value = true;

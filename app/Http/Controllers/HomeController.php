@@ -74,12 +74,12 @@ class HomeController extends Controller
 			]);
 
 			return response()->json(['success' => true, 'message' => 'File has been uploaded.']);
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        return response()->json(['success' => false, 'error' => 'Only PDF files are allowed.']);
-    } catch (\Exception $e) {
-        Log::error($e->getMessage());
-        return response()->json(['success' => false, 'error' => $e->getMessage()]);
-    }
+		} catch (\Illuminate\Validation\ValidationException $e) {
+			return response()->json(['success' => false, 'error' => 'Only PDF files are allowed.']);
+		} catch (\Exception $e) {
+			Log::error($e->getMessage());
+			return response()->json(['success' => false, 'error' => $e->getMessage()]);
+		}
 	}
 
 	public function search(Request $request)
@@ -117,16 +117,15 @@ class HomeController extends Controller
 					$text = mb_convert_encoding($text, 'UTF-8');
 
 					// Search for matches in this page
-					preg_match_all("/$query/i", $text, $matches, PREG_OFFSET_CAPTURE);
+					preg_match_all("/(\S*(?:\s\S*){0,5})$query(\S*(?:\s\S*){0,5})/i", $text, $matches, PREG_SET_ORDER);
 
 					// Process results
-					foreach ($matches[0] as $match) {
-						// Get start and end positions of the match
-						$start = max(0, min($match[1], $match[1] - 50));
-						$end = min(mb_strlen($text), $match[1] + mb_strlen($match[0]) + 50);
-
+					foreach ($matches as $match) {
 						// Get snippet
-						$snippet = mb_substr($text, $start, $end - $start);
+						$snippet = $match[1] . $query . $match[2];
+
+						// Replace \s+ with a normal space
+						$snippet = preg_replace('/\\\s\+/', ' ', $snippet);
 
 						// Add result
 						$results[] = [
