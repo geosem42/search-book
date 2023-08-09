@@ -117,7 +117,7 @@ class HomeController extends Controller
 					$text = mb_convert_encoding($text, 'UTF-8');
 
 					// Search for matches in this page
-					preg_match_all("/(\S*(?:\s\S*){0,5})$query(\S*(?:\s\S*){0,5})/i", $text, $matches, PREG_SET_ORDER);
+					preg_match_all("/(\S*(?:\s\S*){0,10})$query(\S*(?:\s\S*){0,10})/i", $text, $matches, PREG_SET_ORDER);
 
 					// Process results
 					foreach ($matches as $match) {
