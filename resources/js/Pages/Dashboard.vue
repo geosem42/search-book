@@ -101,25 +101,25 @@ const submitSearch = async () => {
 };
 
 const formattedResults = computed(() => {
-    return results.value.map((result) => {
-        // Limit the length of the snippet to 255 characters
-        let snippet = result.snippet.substring(0, 255);
+	return results.value.map((result) => {
+		// Limit the length of the snippet to 255 characters
+		let snippet = result.snippet.substring(0, 255);
 
-        // Add three dots before and after the snippet
-        snippet = '...' + snippet + '...';
+		// Add three dots before and after the snippet
+		snippet = '...' + snippet + '...';
 
-        // Create a regular expression that matches the search query with optional spaces between the words
-        const regex = new RegExp(`(${query.value.replace(/\s+/g, '\\s+')})`, 'gi');
+		// Create a regular expression that matches the search query with optional spaces between the words
+		const regex = new RegExp(`(${query.value.replace(/\s+/g, '\\s+')})`, 'gi');
 
-        // Replace all occurrences of the search query with a highlighted version
-        snippet = snippet.replace(regex, '<span class="text-blue-600 font-bold">$1</span>');
+		// Replace all occurrences of the search query with a highlighted version
+		snippet = snippet.replace(regex, '<span class="text-blue-600 font-bold">$1</span>');
 
-        return {
-            term: query.value,
-            page: result.page,
-            snippet: snippet,
-        };
-    });
+		return {
+			term: query.value,
+			page: result.page,
+			snippet: snippet,
+		};
+	});
 });
 
 
