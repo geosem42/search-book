@@ -31,3 +31,6 @@ Run server
 ```
 php artisan serve
 ```
+
+# Screenshots
+![Screenshot](https://i.imgur.com/voNfeSl.png)
