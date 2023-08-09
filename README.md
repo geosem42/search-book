@@ -23,7 +23,7 @@ Generate app key
 ```
 php artisan key:generate 
 ```
-Link the images directory
+Link the storage directory
 ```
 php artisan storage:link
 ```
