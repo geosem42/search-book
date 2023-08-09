@@ -213,8 +213,10 @@ watch(query, () => {
 		<div v-if="searchModalOpen && selectedDocument"
 			class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
 			<div class="rounded-lg relative w-full max-w-screen-lg h-full max-h-[80vh] overflow-y-auto">
-				<button class="absolute z-10 top-[1rem] right-[1rem] w-6 h-6 text-gray-100 bg-slate-600 rounded-full text-xs" @click="closeSearchModal">X</button>
 				<div class="modal-header">
+					<!-- Move button element inside modal-header div -->
+					<button class="absolute top-[1rem] right-[1rem] w-6 h-6 text-gray-100 bg-slate-600 rounded-full text-xs"
+						@click="closeSearchModal">X</button>
 					<h3 class="text-lg font-medium mb-4">{{ selectedDocument.original_name }}</h3>
 					<form @submit.prevent="submitSearch" class="flex items-center mb-4 gap-2">
 						<input type="text" v-model="query" class="border border-gray-300 rounded-md px-2 py-1 flex-grow" />
