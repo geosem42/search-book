@@ -23,6 +23,10 @@ Generate app key
 ```
 php artisan key:generate 
 ```
+Link the storage directory
+```
+php artisan storage:link
+```
 Build assets
 ```
 npm run build
@@ -31,3 +35,6 @@ Run server
 ```
 php artisan serve
 ```
+
+# Screenshots
+![Screenshot](https://i.imgur.com/PJJ3KAi.png)
