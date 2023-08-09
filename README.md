@@ -19,6 +19,10 @@ Migrate the database
 ```
 php artisan migrate
 ```
+Generate app key
+```
+php artisan key:generate 
+```
 Build assets
 ```
 npm run build
