@@ -33,4 +33,4 @@ php artisan serve
 ```
 
 # Screenshots
-![Screenshot](https://i.imgur.com/voNfeSl.png)
+![Screenshot](https://i.imgur.com/PJJ3KAi.png)
