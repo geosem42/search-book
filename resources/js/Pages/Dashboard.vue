@@ -277,5 +277,10 @@ watch(query, () => {
 
 .search {
 	cursor: pointer;
+	transition: transform 0.2s ease-in-out;
+}
+.search:hover {
+    transform: scale(1.3);
+    stroke: rgb(37 99 235);
 }
 </style>
