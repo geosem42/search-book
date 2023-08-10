@@ -102,7 +102,7 @@ const submitSearch = async () => {
 
 const formattedResults = computed(() => {
 	return results.value.map((result) => {
-		// Limit the length of the snippet to 255 characters
+		// Limit the length of the snippet
 		let snippet = result.snippet.substring(0, 600);
 
 		// Add three dots before and after the snippet
