@@ -15,10 +15,6 @@ Install NPM packages
 ```
 npm install
 ```
-Migrate the database
-```
-php artisan migrate
-```
 Generate app key
 ```
 php artisan key:generate 
@@ -26,6 +22,10 @@ php artisan key:generate
 Link the storage directory
 ```
 php artisan storage:link
+```
+Migrate the database
+```
+php artisan migrate
 ```
 Build assets
 ```
